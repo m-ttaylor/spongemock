@@ -1,7 +1,6 @@
-if __name__ == "__main__":
-    pass
-
+alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 def flip(word):
+    # usage: one char
     rtn = []
     for i in word:
         if i.upper() == i:
@@ -9,34 +8,6 @@ def flip(word):
         else:
             rtn.append(i.upper())
     return ''.join(rtn)
-
-def mock(string):
-    string = string.lower()
-    rtn = ""
-    letter_count = 1
-    for char in string:
-        even = (letter_count%2 == 0)
-        if even:
-            rtn += char.upper()
-        else:
-            rtn += char
-
-        if char != " ":
-            letter_count +=1    
-    return rtn
-
-def mock2(string):
-    rtn = ''
-    letter_count = 1
-    string = string.lower()
-    for char in string:
-        if letter_count%2==0:
-            rtn += flip(char)
-        else:
-            rtn += char
-        if char != " ":
-            letter_count += 1
-    return rtn
 
 def oldflip(word, end_on_flip):
     rtn = ''
@@ -61,53 +32,30 @@ def wordflip(word, end_on_flip):
     for letter in word:
         if not flipped:
             letter = flip(letter)
-        flipped = not flipped
-
-            # exceptions
-        # if letter == 'I':
-        #     print(f"word is {word}")
-        #     letter = letter.lower()
-        #     flipped = False
-        # if letter == 'l':
-        #     letter = letter.upper()
-        
-
+        if letter in alphabet:
+            flipped = not flipped
+        if letter == 'I' or letter == 'l':
+            letter = flip(letter)
+            flipped = not flipped
         rtn += letter
 
-    # if 'I' in word or 'l' in word:
-    #     rtn = flip(word)
-    # if 'l' in word:
-    #     rtn = wordflip(word, flipped)
     return (rtn, flipped)
-        
 
-
-def mock3(string):
+def mock(string):
     rtn = []
-    words = string.split(' ')
-    words = [word.lower() for word in words]
-    print(words)
+    words = string.lower().split(' ')
     end_on_flip = True
     for word in words:
         flipped, end_on_flip = wordflip(word, end_on_flip)
-        if 'l' or 'I' in flipped:
-            flipped, end_on_flip = wordflip(word, not end_on_flip)
+        # if 'l' or 'I' in flipped:
+        #     flipped, end_on_flip = wordflip(word, not end_on_flip)
         rtn.append(flipped)
     return " ".join(rtn)
-        
 
-# test1 = "What a neat program"
-# answer = "wHaT a NeAt PrOgRaM"
+    """iLLinOiS"""
+    """
+    TiP
+    """
 
-# print(mock(test1))
-# print(mock(test1) == answer)
-# print("-"*10)
-# print(mock2(test1))
-# print(mock2(test1) == answer)
-
-# # next 
-# test3 = "ryan I do not like this rule"
-# answer3 = "rYaN i Do NoT LiKe tHiS RuLe"
-# print("-"*10)
-# print(mock3(test3))
-# print(mock3(test3) == answer3)
+if __name__ == "__main__":
+    print(flip("rYaN sUcKs DoNkeY dOnG"))
